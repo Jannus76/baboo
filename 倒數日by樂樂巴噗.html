@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>countdown</title>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:700);
+        @font-face {
+            font-family: naikaifont;
+            src: url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.89/webfont/NaikaiFont-Regular.woff2) format("woff2");
+        }
+        body{
+            font-family: 'Comic Sans MS', 'naikaifont', cursive; 
+            color: rgba(255,255,255,1);  /*字的顏色*/
+        }
+        #clock-background {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 8px 14px 8px 14px;
+            background: rgba(125,185,222,0.5);  /*輸入想要的背景顏色及透明度 rgba(r,g,b,透明度)*/
+            border-radius: 16px 16px 16px 16px
+        }
+
+        .date-divider {
+            height: 2px;
+            background: #FFFFFF;
+            width: 100%;
+            border-radius: 3px;
+            margin: 8px 0px 8px 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="clock-background">
+        <div style="text-align: center;" >
+            <span id="Day" style="font-size: 24px; text-align: center;"></span> 
+            <span id="TIME" style="font-size: 20px; text-align: center;" ></span>
+            <div class="date-divider"></div>   
+            <span style="font-size: 16px; text-align: center;">這裡輸入倒數標題</span> 
+        </div>
+         
+    </div>
+    <script>
+        const e = new Date("2026-02-01T00:00:00Z"); /*目標日期時間(GMT+0!!!!!很重要)*/
+        const f = e.getTime();
+        setInterval(cd,1000);
+        function cd(){
+            const arrt = ["",":","",":",""];
+            const arrd = ["","d "];
+            const d = new Date();
+            const t = d.getTime();
+            const x = (f-t)/1000;
+            arrt[4] = parseInt(x%60).toString();
+            arrt[2] = parseInt((x/60)%60).toString();
+            arrt[0] = parseInt((x/3600)%24).toString();
+            arrd[0] = parseInt(x/86400).toString();
+            if(arrt[4].length <= 1){
+                arrt[4]="0"+arrt[4];
+            };
+            if(arrt[2].length <= 1){
+                arrt[2]="0"+arrt[2];
+            };
+            if(arrt[0].length <= 1){
+                arrt[0]="0"+arrt[0];
+            };
+            document.getElementById("TIME").innerHTML = arrt.toString().replaceAll(",","");
+            document.getElementById("Day").innerHTML = arrd.toString().replaceAll(",","");
+        };     
+    </script>
+  
+   
+</body>
+</html>
